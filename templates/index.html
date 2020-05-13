@@ -36,7 +36,7 @@
     <main>
 
         <!-- DIV REGISTRO ACUAL -->
-        <div class="div-content">
+        <div class="div-content" style="min-height: 205px;">
             
             {# Si el ultimo registro tiene un final_registro y esta cerrado. Formulario para crear un registro nuevo#}
             {% if datos_ultimo_registro_usuario.final_registro is not none%}
@@ -47,17 +47,21 @@
                 </tr>
             </table>
             <a class="btn-comenzar" href="/crear_registro/{{_id_usuario}}/" id="boton_comenzar">Comenzar</a>
+
+            <!-- JS para dar valor dinamico segun el select al boton comenzar. -->
+            <script src="{{url_for('static',filename='js/botones_url_dinamicos.js')}}"></script>
+
             {% else %}
             <h1>Registro Actual</h1>
             <table>
                 <tr>
-                    <td>Tipo</td><td>{{datos_ultimo_registro_usuario._id_tipo_registro}}</td>
+                    <td>Tipo</td><td>{{datos_ultimo_registro_usuario.tipo[0].tipo}}</td>
                 </tr>
                 <tr>
-                    <td>Comienzo</td><td>{{datos_ultimo_registro_usuario.comienzo_registro|remover_milisegundos}}</td>
+                    <td>Comienzo</td><td id="date_inicio_registro">{{datos_ultimo_registro_usuario.comienzo_registro|remover_milisegundos}}</td>
                 </tr>
                 <tr>
-                    <td>Duracion</td><td>!!placeholder!!</td>
+                    <td>Duracion</td><td id="timedelta_duracion">!!placeholder!!</td>
                 </tr>
             </table>
             <a class="btn-finalizar" href="/cerrar_registro/{{_id_usuario}}" id="boton_finalizar">Finalizar</a>
@@ -69,15 +73,24 @@
         <!-- DIV VISUALIZACION DATOS REGISTROS -->
         <div class="div-content">
             <h1>Datos Registros</h1>
-            <table>
-                <tr>
-                    <th>Tipo</th><th>Comienzo</th><th>Final</th><th>Duracion</th>
-                </tr>
-                {% for registro in datos_registros_usuario%}
-                <tr>
-                    <td>{{registro._id_tipo_registro}}</td><td>{{registro.comienzo_registro|remover_milisegundos}}</td><td>{% if registro.final_registro is not none%}{{registro.final_registro|remover_milisegundos}}{% endif %}</td><td>{% if registro.final_registro is not none%}{{(registro.final_registro-registro.comienzo_registro)|remover_milisegundos}}{% endif %}</td>
-                </tr>
-                {% endfor %}
+            <table id="tabla-registros"> 
+                <thead>
+                    <tr>
+                        <th>Tipo</th><th>Comienzo</th><th>Final</th><th>Duracion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in datos_registros_usuario%}
+                    {% if registro.final_registro is none%}
+                    <tr class="tr-remarcado">
+                    {% else %}
+                    <tr>
+                    {%endif%}
+                        <td>{{registro.tipo[0].tipo}}</td><td>{{registro.comienzo_registro|remover_milisegundos}}</td><td>{% if registro.final_registro is not none%}{{registro.final_registro|remover_milisegundos}}{% endif %}</td><td id="time_delta_registro">{% if registro.final_registro is not none%}{{(registro.final_registro-registro.comienzo_registro)|remover_milisegundos}}{% endif %}</td>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
             </table>
 
         </div>
@@ -87,7 +100,7 @@
     
 </body>
 
-<script src="{{url_for('static',filename='js/botones_url_dinamicos.js')}}"></script>
+<script src="{{url_for('static',filename='js/timedelta.js')}}"></script>
 
 
 </html>

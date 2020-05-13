@@ -23,18 +23,28 @@ def query_registros():
     lista_registros = registros_collection.find().sort("comienzo_registro",-1)
     return lista_registros
 
+#Funcion query datos_por_id_usuario    JOIN     _id_tipo_registro => tipo   para crear un campo nombre_tipo.
 def query_registros_por_id_usuario(id_usuario):
-    lista_registros = registros_collection.find({"_id_usuario":ObjectId(id_usuario)}).sort("comienzo_registro",-1)
-    return lista_registros
+    data = registros_collection.aggregate([
+        {"$match":{"_id_usuario":ObjectId(id_usuario)}},
+        {"$lookup":{"from":"registros_tipo","localField":"_id_tipo_registro","foreignField":"_id","as":"tipo"}},
+        {"$sort": {"comienzo_registro":-1} }
+    ])
+    return data
+
 
 def query_utlimo_registro_por_id_usuario(id_usuario):
-    ultimo_registro = registros_collection.find({"_id_usuario":ObjectId(id_usuario)}).sort("comienzo_registro",-1).limit(1)
+    ultimo_registro = registros_collection.aggregate([
+       {"$match":{"_id_usuario":ObjectId(id_usuario)}},
+       {"$lookup":{"from":"registros_tipo","localField":"_id_tipo_registro","foreignField":"_id","as":"tipo"}},
+       {"$sort": {"comienzo_registro":-1} },
+       {"$limit":1}
+    ])
     try:
-        return ultimo_registro[0]
+        ultimo_registro = ultimo_registro.next()
     except:
-        return None
-
-
+        ultimo_registro = None
+    return ultimo_registro
 
 if __name__=="__main__":
 

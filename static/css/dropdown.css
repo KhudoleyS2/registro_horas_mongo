@@ -25,6 +25,8 @@
     text-decoration: none;
     display: block;
     border-bottom: 1px solid #ffffff;
+    background-color: #222222;
+    text-align: center;
   }
   
   .dropdown-content a:hover {background-color: #444444}

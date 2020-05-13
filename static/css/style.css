@@ -5,6 +5,7 @@
     color: #ffffff;
     font-size: 25px;
     font-family: 'Bebas Neue', cursive;
+    font-weight: normal;
 }
 
 h1{
@@ -12,28 +13,40 @@ h1{
     border-bottom: 1px solid white;
 }
 
+table{
+    border-collapse: collapse;
+}
+
 table *{
     font-size: 20px;
 }
 
 td{
-    padding-right: 50px;
+    padding-right: 30px;
 }
 
 th{
     padding-right: 50px;
     border-bottom: 1px solid #ffffff;
+    text-align: left;
 }
+
 
 
 /* DIVS */
 .div-content{
     margin: 50px 20px;
+    margin-bottom: 120px;
 }
 
 .div-content > *{
-    margin: 50px 0;
+    margin: 25px 0;
 }
+
+
+
+
+
 
 
 /* BOTONES */
@@ -61,3 +74,24 @@ th{
 .btn-finalizar:hover{
     background-color: #a01f1f;
 }
+
+
+
+
+
+/* REMARCADOS USO */
+#timedelta_duracion{
+    background-color: #4caf50;
+    padding: 5px 10px;
+    text-align: center;
+    
+}
+
+.tr-remarcado > *{
+    background-color: #4caf50;
+}
+
+#tabla-registros *{
+    font-size: 14px;
+}
+
