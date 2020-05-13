@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 25px;
+    font-family: 'Bebas Neue', cursive;
+}
+
+h1{
+    font-size: 25px;
+    border-bottom: 1px solid white;
+}
+
+table *{
+    font-size: 20px;
+}
+
+td{
+    padding-right: 50px;
+}
+
+
+/* DIVS */
+.div-content{
+    margin: 50px 20px;
+}
+
+.div-content > *{
+    margin: 50px 0;
+}
+
+
+/* BOTONES */
+
+.btn-comenzar{
+    font-size: 18px;
+    padding: 12px 26px;
+    text-decoration: none;
+    background-color: #4CAF50;
+}
+.btn-comenzar:hover{
+    background-color: #3e8e41;
+}
+
+
+.btn-finalizar{
+    font-size: 18px;
+    padding: 12px 26px;
+    text-decoration: none;
+    background-color: #e20505;
+}
+.btn-finalizar:hover{
+    background-color: #a01f1f;
+}

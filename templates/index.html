@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <!-- CUSTOM DROPDOWN CSS -->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/dropdown.css')}}">
+    <!-- CUSTOM FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <!-- MOMENT JS -->
+    <script src="{{url_for('static',filename='js/momentjs.js')}}"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTRO HORAS</title>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <!-- DIV DROPDOWN SELECCIONAR USUARIO -->
+        <div class="dropdown">
+            <button class="dropbtn">{%if _id_usuario is none %}USUARIO{% else%}{{usuario.nombre}}{% endif %}</button>
+            <div class="dropdown-content">
+                {% for usuario in datos_usuario%}
+                <a href="{{usuario._id}}">{{usuario.nombre}}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <p style="display: none"></p>
+    </header>
+    
+    <!-- MAIN -->
+    <main>
+
+        <!-- DIV REGISTRO ACUAL -->
+        <div class="div-content">
+            {# Si el ultimo registro tiene un final_registro y esta cerrado. Formulario para crear un registro nuevo#}
+            <h1>Nuevo Registro</h1>
+            <table>
+                <tr>
+                    <td>Tipo de registro</td><td><select name="select_tipo_registro" id="select_tipo_registro">{% for tipo_registro in datos_tipo_registro %}<option value="{{tipo_registro._id}}">{{tipo_registro.tipo}}</option>{% endfor %}</select></td>
+                </tr>
+            </table>
+            <a class="btn-comenzar" href="/crear_registro/{{_id_usuario}}/" id="boton_comenzar">Comenzar</a>
+
+        </div>
+        
+
+        <!-- DIV VISUALIZACION DATOS REGISTROS -->
+        <div>
+
+        </div>
+
+    </main>
+    
+    
+</body>
+
+<script src="{{url_for('static',filename='js/botones_url_dinamicos.js')}}"></script>
+
+
+</html>
