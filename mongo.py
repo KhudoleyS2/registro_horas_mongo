@@ -1,8 +1,9 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
+from login_data import login_data
 
 #Mongo conexion
-client = MongoClient("mongodb+srv://KhudoleyS2:Uhkolcv1-@q2-1uvle.mongodb.net/test?retryWrites=true&w=majority")
+client = MongoClient("mongodb+srv://{}:{}@q2-1uvle.mongodb.net/test?retryWrites=true&w=majority".format(login_data['user'],login_data['password']))
 
 #Usar db mongo.
 db = client['registro_horas']
